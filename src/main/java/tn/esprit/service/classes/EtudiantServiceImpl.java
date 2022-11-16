@@ -20,21 +20,33 @@ public class EtudiantServiceImpl  implements EtudiantService{
 	EtudiantRepository etudRep;
 	
 	@Scheduled(fixedRate = 60000)
-	public void fixedrateMethod() {
-		System.out.println("method with fixed rate");
+	public void chercherEtudiant2() {
+		log.info( etudRep.findAll()+" getting students ...");
 	}
-
+	@Scheduled(fixedDelay = 60000)
+	public void fixedDelayMethod() {
+		log.info( etudRep.findAll()+" getting students ...");
+	}
+	@Scheduled(cron = "0 0 1 1 * *" )
+	public void cronMethod() {
+		etudRep.deleteAll();
+	}
 	@Override
 	public Etudiant afficherEtudiant(int id) {
 		log.info("test"+etudRep.findById(id).get().getNomE());
-	
+		log.info(" getting students ...");
 		return etudRep.findById(id).get();
 	}
 
 	@Override
 	public int ajouterEtudiant(Etudiant e) {
 		// TODO Auto-generated method stub
-		 etudRep.save(e);
+		try {
+			 etudRep.save(e);
+		}catch (Exception ex) {
+			// TODO: handle exception
+			  log.info("test1"+ex.getStackTrace());	
+		}
 		return e.getIdEtudiant();
 		
 	}
@@ -42,7 +54,6 @@ public class EtudiantServiceImpl  implements EtudiantService{
 	@Override
 	public Etudiant modifierEtudiant(Etudiant e) {
 		// TODO Auto-generated method stub
-	etudRep.findById(e.getIdEtudiant()).get();
 		etudRep.save(e);
 		return (e);
 	}
@@ -66,5 +77,19 @@ public class EtudiantServiceImpl  implements EtudiantService{
 		return etudRep.custom(id_etudiant);
 	}
 	
-
+	@Override
+	public List<Etudiant> getAllEtudiantsBeginByNomE(String name) {
+		log.info(""+name);
+		return etudRep.getAllEtudiantsBeginByNomE(name);
+	}
+	@Override
+	public List<Etudiant> getAllEtudiant() {
+		return etudRep.getAllEtudiant();
+	}
+	@Override
+	public Etudiant getEtudiantByNomE(String name) {
+		log.info("resultat de recherche :"+etudRep.getEtudiantByNomE(name));
+		return etudRep.getEtudiantByNomE(name);
+		
+	}
 }

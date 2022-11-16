@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table( name = "Contrat")
 	public class Contrat implements Serializable{
@@ -32,6 +34,8 @@ import org.hibernate.annotations.ManyToAny;
 	@Temporal(TemporalType.DATE)
 	private Date dateFinContrat;
 	@Enumerated(EnumType.STRING)
+	@ManyToOne
+	private Etudiant etudiant;
 	private Specialite specialite;
 	private boolean archive;
 	private int montantContrat;
@@ -71,12 +75,20 @@ import org.hibernate.annotations.ManyToAny;
 	public void setMontantContrat(int montantContrat) {
 		this.montantContrat = montantContrat;
 	}
-	public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat, Specialite specialite,
-			boolean archive, int montantContrat) {
+
+	public Etudiant getEtudiant() {
+		return etudiant;
+	}
+	public void setEtudiant(Etudiant etudiant) {
+		this.etudiant = etudiant;
+	}
+	public Contrat(Integer idContrat, Date dateDebutContrat, Date dateFinContrat, Etudiant etudiant,
+			Specialite specialite, boolean archive, int montantContrat) {
 		super();
 		this.idContrat = idContrat;
 		this.dateDebutContrat = dateDebutContrat;
 		this.dateFinContrat = dateFinContrat;
+		this.etudiant = etudiant;
 		this.specialite = specialite;
 		this.archive = archive;
 		this.montantContrat = montantContrat;
@@ -84,7 +96,6 @@ import org.hibernate.annotations.ManyToAny;
 	public Contrat() {
 		super();
 	}
-	@ManyToOne
-	Etudiant etudiant;
+	
 	
 }

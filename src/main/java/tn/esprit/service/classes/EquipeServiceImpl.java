@@ -33,7 +33,6 @@ public class EquipeServiceImpl  implements EquipeService{
 	@Override
 	public Equipe modifierEquipe(Equipe e) {
 		// TODO Auto-generated method stub
-		equipRep.findById(e.getIdEquipe()).get();
 		equipRep.save(e);
 		return (e);
 	}

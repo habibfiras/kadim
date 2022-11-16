@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table( name = "Equipe")
 public class Equipe implements Serializable{
@@ -24,6 +26,20 @@ public class Equipe implements Serializable{
 	private int idEquipe;
 	private String nomEquipe;
 	private Niveau niveau;
+	@OneToOne
+	private Detailequipe detailequipe;
+	@ManyToMany
+	private Set<Etudiant> etudiant;
+	public Equipe(int idEquipe, String nomEquipe, Niveau niveau, Detailequipe detailequipe, Set<Etudiant> etudiant) {
+		super();
+		this.idEquipe = idEquipe;
+		this.nomEquipe = nomEquipe;
+		this.niveau = niveau;
+		this.detailequipe = detailequipe;
+		this.etudiant = etudiant;
+	}
+	public Equipe() {
+	}
 	public int getIdEquipe() {
 		return idEquipe;
 	}
@@ -42,9 +58,18 @@ public class Equipe implements Serializable{
 	public void setNiveau(Niveau niveau) {
 		this.niveau = niveau;
 	}
-	@OneToOne
-	private Detailequipe detailequipe;
-	@ManyToMany(mappedBy="equipe", cascade = CascadeType.ALL)
-
-	private Set<Etudiant> etudiant;
+	public Detailequipe getDetailequipe() {
+		return detailequipe;
+	}
+	public void setDetailequipe(Detailequipe detailequipe) {
+		this.detailequipe = detailequipe;
+	}
+	public Set<Etudiant> getEtudiant() {
+		return etudiant;
+	}
+	public void setEtudiant(Set<Etudiant> etudiant) {
+		this.etudiant = etudiant;
+	}
+	
+	
 }

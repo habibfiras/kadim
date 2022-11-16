@@ -60,5 +60,20 @@ public class EtudiantController {
 	public Etudiant modifir(@RequestBody Etudiant operateur) {
 	return etudServ.modifierEtudiant(operateur);
 	}
+	  
+	  @GetMapping("existenceByName/{name}")
 	 
+	  public Etudiant testExistEtudiantByname(@PathVariable("name") String name) {
+		  return etudServ.getEtudiantByNomE(name); 
+	  }
+	  
+	  @GetMapping("filterEtudiantsBeginByName/{name}")
+	  public List<Etudiant> allEtudiantsNameCommencePar(@PathVariable("name") String name){
+		  return etudServ.getAllEtudiantsBeginByNomE(name);
+	  }
+	  
+	  @GetMapping("getAllEtudiants")
+	  public List<Etudiant> getAllEtudiant(){
+		  return etudServ.getAllEtudiant();  
+	  } 
 }

@@ -13,5 +13,8 @@ public interface EtudiantService {
 	public void supprimerEtudiant(int id);
 	public List<Etudiant> chercherEtudiant();
 	Etudiant custom(@Param("id_etudiant") int id_etudiant);
+	List<Etudiant> getAllEtudiantsBeginByNomE(String name);
+	List<Etudiant> getAllEtudiant();
+	Etudiant getEtudiantByNomE(String name);
 	
 }

@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table( name = "Etudiant")
 public class Etudiant implements Serializable {
@@ -32,10 +34,40 @@ private String prenomE;
 private String nomE;
 @Temporal(TemporalType.DATE)
 private Date dateDebut;
-
+@OneToMany(mappedBy = "etudiant")
+private Set<Contrat> contrat; 
 @Enumerated(EnumType.STRING)
 private Option option;
-// Constructeur et accesseurs (getters) et mutateurs (setters)
+@ManyToOne
+Department department;
+@ManyToMany(mappedBy = "etudiant")
+@JsonIgnore
+private Set<Equipe> equipe;
+public Etudiant() {
+	super();
+}
+
+public Etudiant(Integer idEtudiant, String prenomE, String nomE, Date dateDebut, Set<Contrat> contrat, Option option,
+		Department department, Set<Equipe> equipe) {
+	super();
+	this.idEtudiant = idEtudiant;
+	this.prenomE = prenomE;
+	this.nomE = nomE;
+	this.dateDebut = dateDebut;
+	this.contrat = contrat;
+	this.option = option;
+	this.department = department;
+	this.equipe = equipe;
+}
+
+public Set<Contrat> getContrat() {
+	return contrat;
+}
+
+public void setContrat(Set<Contrat> contrat) {
+	this.contrat = contrat;
+}
+
 public Integer getIdEtudiant() {
 	return idEtudiant;
 }
@@ -54,38 +86,30 @@ public String getNomE() {
 public void setNomE(String nomE) {
 	this.nomE = nomE;
 }
-
-
-public Etudiant() {
-}
-public Etudiant(Integer idEtudiant, String prenomE, String nomE, Date dateDebut, Option option) {
-	super();
-	this.idEtudiant = idEtudiant;
-	this.prenomE = prenomE;
-	this.nomE = nomE;
-	this.dateDebut = dateDebut;
-	this.option = option;
-}
 public Date getDateDebut() {
 	return dateDebut;
 }
 public void setDateDebut(Date dateDebut) {
 	this.dateDebut = dateDebut;
 }
-public Option getOp() {
+public Option getOption() {
 	return option;
 }
-public void setOp(Option op) {
-	this.option = op;
+public void setOption(Option option) {
+	this.option = option;
 }
-
-
-@ManyToOne
-
-Department department;
-@ManyToMany(cascade = CascadeType.ALL)
-
-private Set<Equipe> equipe;
+public Department getDepartment() {
+	return department;
+}
+public void setDepartment(Department department) {
+	this.department = department;
+}
+public Set<Equipe> getEquipe() {
+	return equipe;
+}
+public void setEquipe(Set<Equipe> equipe) {
+	this.equipe = equipe;
+}
 
 
 }

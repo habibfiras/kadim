@@ -18,7 +18,6 @@ public class ContratServiceImpl implements ContratService{
 		// TODO Auto-generated method stub
 		return contratRepository.findById(id).get();
 	}
-
 	@Override
 	public int ajoutercontrat(Contrat e) {
 		// TODO Auto-generated method stub
@@ -29,7 +28,6 @@ public class ContratServiceImpl implements ContratService{
 	@Override
 	public Contrat modifierContrat(Contrat e) {
 		// TODO Auto-generated method stub
-		contratRepository.findById(e.getIdContrat()).get();
 		contratRepository.save(e);
 		return (e);
 	}

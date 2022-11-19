@@ -21,4 +21,5 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Integer>{
 	public List<Etudiant> getAllEtudiant();
 	public Etudiant getEtudiantByNomE(String name);
 
+
 } 

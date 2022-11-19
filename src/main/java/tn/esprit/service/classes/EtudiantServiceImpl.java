@@ -9,7 +9,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import tn.esprit.Persistance.Contrat;
+import tn.esprit.Persistance.Equipe;
 import tn.esprit.Persistance.Etudiant;
+import tn.esprit.Persistance.Repository.ContratRepository;
+import tn.esprit.Persistance.Repository.EquipeRepository;
 import tn.esprit.Persistance.Repository.EtudiantRepository;
 import tn.esprit.service.Interfaces.EtudiantService;
 
@@ -18,6 +22,9 @@ import tn.esprit.service.Interfaces.EtudiantService;
 public class EtudiantServiceImpl  implements EtudiantService{
 	@Autowired
 	EtudiantRepository etudRep;
+	ContratRepository contratRep;
+	EquipeRepository equipeRep;
+
 	
 	@Scheduled(fixedRate = 60000)
 	public void chercherEtudiant2() {
@@ -92,4 +99,17 @@ public class EtudiantServiceImpl  implements EtudiantService{
 		return etudRep.getEtudiantByNomE(name);
 		
 	}
+	@Override
+	public void affectContratEtudiant(int idE,int inC) {
+		Etudiant e = etudRep.findById(idE).get();
+		Contrat c = contratRep.findById(inC).get();
+		c.setEtudiant(e);
+		contratRep.save(c);
+	}
+	//public void affectEquipeEtudiant(int idE,int inEQ) {
+		//Etudiant e = etudRep.findById(idE).get();
+		//Equipe c = equipeRep.findById(inEQ).get();
+		//c.setEtudiant(e);
+		//equipeRep.save(c);
+	//}
 }

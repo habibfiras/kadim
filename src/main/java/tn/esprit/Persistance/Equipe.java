@@ -38,6 +38,7 @@ public class Equipe implements Serializable{
 		this.detailequipe = detailequipe;
 		this.etudiant = etudiant;
 	}
+	
 	public Equipe() {
 	}
 	public int getIdEquipe() {

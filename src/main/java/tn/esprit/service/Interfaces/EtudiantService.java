@@ -16,5 +16,7 @@ public interface EtudiantService {
 	List<Etudiant> getAllEtudiantsBeginByNomE(String name);
 	List<Etudiant> getAllEtudiant();
 	Etudiant getEtudiantByNomE(String name);
+	public void affectContratEtudiant(int idE,int inC);
+
 	
 }

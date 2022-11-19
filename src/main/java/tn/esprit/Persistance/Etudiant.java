@@ -35,7 +35,6 @@ private String nomE;
 @Temporal(TemporalType.DATE)
 private Date dateDebut;
 @OneToMany(mappedBy = "etudiant")
-@JsonIgnore
 private Set<Contrat> contrat; 
 @Enumerated(EnumType.STRING)
 private Option option;

@@ -21,7 +21,8 @@ public class Department implements Serializable{
 	@Column(name="idDepart")
 	private int idDepart;
 	private String nomDepart;
-	@OneToMany(mappedBy="department" ,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="department")
+	@JsonIgnore
     private Set<Etudiant> etudiant;
 	
 	public int getIdDepart() {

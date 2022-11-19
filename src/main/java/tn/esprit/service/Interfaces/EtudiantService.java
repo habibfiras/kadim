@@ -17,6 +17,8 @@ public interface EtudiantService {
 	List<Etudiant> getAllEtudiant();
 	Etudiant getEtudiantByNomE(String name);
 	public void affectContratEtudiant(int idE,int inC);
+	public void assignEtudiantToDepartement (Integer etudiantId, Integer
+			departementId) ;
 
 	
 }

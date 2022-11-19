@@ -25,6 +25,12 @@ public class Department implements Serializable{
 	@JsonIgnore
     private Set<Etudiant> etudiant;
 	
+	public Set<Etudiant> getEtudiant() {
+		return etudiant;
+	}
+	public void setEtudiant(Set<Etudiant> etudiant) {
+		this.etudiant = etudiant;
+	}
 	public int getIdDepart() {
 		return idDepart;
 	}
@@ -37,10 +43,12 @@ public class Department implements Serializable{
 	public void setNomDepart(String nomDepart) {
 		this.nomDepart = nomDepart;
 	}
-	public Department(int idDepart, String nomDepart) {
+
+	public Department(int idDepart, String nomDepart, Set<Etudiant> etudiant) {
 		super();
 		this.idDepart = idDepart;
 		this.nomDepart = nomDepart;
+		this.etudiant = etudiant;
 	}
 	public Department() {
 		super();

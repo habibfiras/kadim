@@ -22,6 +22,8 @@ import org.hibernate.annotations.ManyToAny;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.core.util.Json;
+
 @Entity
 @Table( name = "Contrat")
 	public class Contrat implements Serializable{
@@ -35,6 +37,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	private Date dateFinContrat;
 	@Enumerated(EnumType.STRING)
 	@ManyToOne
+	@JsonIgnore
 	private Etudiant etudiant;
 	private Specialite specialite;
 	private boolean archive;

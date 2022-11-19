@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+import tn.esprit.Persistance.Department;
 import tn.esprit.Persistance.Etudiant;
 import tn.esprit.service.Interfaces.EtudiantService;
 
@@ -76,4 +77,9 @@ public class EtudiantController {
 	  public List<Etudiant> getAllEtudiant(){
 		  return etudServ.getAllEtudiant();  
 	  } 
+	  
+	@PutMapping("assignEtudiantToDepartement/{eid}/{did}")
+	public void assignEtudiantToDepartement(@PathVariable("eid") Integer etudiantId,@PathVariable("did") Integer departementId) {
+			 etudServ.assignEtudiantToDepartement(etudiantId, departementId);
+		}
 }

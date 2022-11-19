@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.Persistance.Contrat;
+import tn.esprit.Persistance.Department;
 import tn.esprit.Persistance.Equipe;
 import tn.esprit.Persistance.Etudiant;
 import tn.esprit.Persistance.Repository.ContratRepository;
+import tn.esprit.Persistance.Repository.DepartementRepository;
 import tn.esprit.Persistance.Repository.EquipeRepository;
 import tn.esprit.Persistance.Repository.EtudiantRepository;
 import tn.esprit.service.Interfaces.EtudiantService;
@@ -22,8 +24,12 @@ import tn.esprit.service.Interfaces.EtudiantService;
 public class EtudiantServiceImpl  implements EtudiantService{
 	@Autowired
 	EtudiantRepository etudRep;
+	@Autowired
 	ContratRepository contratRep;
+	@Autowired
 	EquipeRepository equipeRep;
+	@Autowired
+	DepartementRepository departementRep;
 
 	
 	@Scheduled(fixedRate = 60000)
@@ -69,8 +75,6 @@ public class EtudiantServiceImpl  implements EtudiantService{
 	public void supprimerEtudiant(int id) {
 		// TODO Auto-generated method stub
 		etudRep.deleteById(id);
-		
-		
 	}
 
 	@Override
@@ -112,4 +116,13 @@ public class EtudiantServiceImpl  implements EtudiantService{
 		//c.setEtudiant(e);
 		//equipeRep.save(c);
 	//}
+	@Override
+	public void assignEtudiantToDepartement(Integer etudiantId, Integer departementId) {
+		Etudiant e = etudRep.findById(etudiantId).get();
+		Department d = departementRep.findById(departementId).get();	
+		e.setDepartment(d);
+		etudRep.save(e);
+        log.info("etudiant "+e.getPrenomE()+" "+e.getNomE()+" assigné au departement "+d.getNomDepart());
+
+	}
 }

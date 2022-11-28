@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.hibernate.HibernateException;
+
 
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.Persistance.Contrat;
@@ -48,7 +51,7 @@ public class EtudiantServiceImpl  implements EtudiantService{
 	public Etudiant afficherEtudiant(int id) {
 		log.info("test"+etudRep.findById(id).get().getNomE());
 		log.info(" getting students ...");
-		return etudRep.findById(id).get();
+		return etudRep.findById(id).orElseThrow();
 	}
 
 	@Override
